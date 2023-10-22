@@ -1,4 +1,4 @@
 fastapi==0.103.2
 uvicorn==0.23.2
 pycodestyle==2.11.1
-surrealdb==1.0.0
+surrealdb==0.3.1

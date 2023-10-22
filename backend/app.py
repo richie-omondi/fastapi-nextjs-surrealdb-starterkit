@@ -1,4 +1,6 @@
-""" This module demonstrates how to create a FastAPI server"""
+""" This module demonstrates how to create a FastAPI App,
+connect it to SurrealDB
+"""
 from surrealdb import Surreal
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
