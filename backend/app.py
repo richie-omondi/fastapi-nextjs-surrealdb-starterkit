@@ -1,7 +1,24 @@
+""" This module demonstrates how to create a FastAPI server"""
+from surrealdb import Surreal
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    Function that connects to a local database endpont,
+    signs this connection in to a specific authentication scope,
+    and switches to a specific namespace and database
+    """
+    
+    db = Surreal("http://localhost:8000")
+    db.connect();
+    await db.signin({"user": "root", "pass": "root"})
+    await db.use("starter", "todo_backend")
+    yield
+    db.close();
 
+app = FastAPI(lifespan=lifespan)
 
 @app.get("/", tags=["Root"])
 async def read_root():
