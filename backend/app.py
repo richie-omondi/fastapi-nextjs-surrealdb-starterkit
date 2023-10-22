@@ -14,7 +14,7 @@ async def lifespan(app: FastAPI):
     """
     
     db = Surreal("http://localhost:8000")
-    db.connect();
+    await db.connect();
     await db.signin({"user": "root", "pass": "root"})
     await db.use("starter", "todo_backend")
     yield
