@@ -15,7 +15,7 @@ async def surreal_db():
     and switches to a specific namespace and database
     """
     db = Surreal("http://localhost:8000")
-    db.connect()
+    await db.connect()
     await db.signin({"user": "root", "pass": "root"})
     await db.use("starter", "todo_backend")
     try:

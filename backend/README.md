@@ -11,19 +11,42 @@ A simple starter kit for building RESTful APIs with FastAPI and SurrealDB
 
 To set up the backend, follow the outlined steps:
 
-1. Clone this repository and create a virtual environment in it:
+1. Ensure you have [installed](https://surrealdb.com/docs/installation) SurrealDB depending on the OS you are using (Linux, MacOS or Windows).
+
+2. Check that you have set up the database correctly. To do so, run:
+
+```console
+surreal version
+```
+
+3. Start the SurrealDB database server using the command:
+
+On Windows
+
+```console
+surreal.exe start memory -A --auth --user root --pass root
+```
+
+On MacOS
+```console
+surreal start memory -A --auth --user root --pass root
+```
+
+This will start an in-memory database server that will lose data when the server is restarted. However, you will have quicker data access times than when you read and write from disk.
+
+4. Clone this repository and create a virtual environment in it:
 
 ```console
 python -m venv venv
 ```
 
-2. Install the modules listed in the `requirements.txt` file:
+5. Install the modules listed in the `requirements.txt` file:
 
 ```console
 (venv)$ pip3 install -r backend/requirements.txt
 ```
 
-3. Start the application:
+6. Start the application:
 
 ```console
 uvicorn backend.main:app --reload
