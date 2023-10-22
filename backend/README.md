@@ -22,3 +22,11 @@ python -m venv venv
 ```console
 (venv)$ pip3 install -r backend/requirements.txt
 ```
+
+3. Start the application:
+
+```console
+uvicorn backend.main:app --reload
+```
+
+The starter listens on port 8000 on address [0.0.0.0](0.0.0.0:8080).
