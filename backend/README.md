@@ -21,15 +21,16 @@ surreal version
 
 3. Start the SurrealDB database server using the command:
 
-On Windows
+    On Windows
 
 ```console
-surreal.exe start memory -A --auth --user root --pass root
+surreal.exe start
 ```
 
-On MacOS
+    On MacOS
+
 ```console
-surreal start memory -A --auth --user root --pass root
+surreal start
 ```
 
 This will start an in-memory database server that will lose data when the server is restarted. However, you will have quicker data access times than when you read and write from disk.
@@ -49,7 +50,7 @@ python -m venv venv
 6. Start the application:
 
 ```console
-uvicorn backend.main:app --reload
+uvicorn backend.main:app --port 80 --reload
 ```
 
-The starter listens on port 8000 on address [0.0.0.0](0.0.0.0:8080).
+The starter listens on port 8000 on address [0.0.0.0](0.0.0.0:80).
