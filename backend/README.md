@@ -21,13 +21,13 @@ surreal version
 
 3. Start the SurrealDB database server using the command:
 
-    On Windows
+On Windows
 
 ```console
 surreal.exe start
 ```
 
-    On MacOS
+On MacOS
 
 ```console
 surreal start
@@ -47,7 +47,13 @@ python -m venv venv
 (venv)$ pip3 install -r backend/requirements.txt
 ```
 
-6. Start the application:
+6. Switch to the backend folder:
+
+```console
+cd backend
+```
+
+7. Start the application:
 
 ```console
 uvicorn backend.main:app --port 80 --reload
