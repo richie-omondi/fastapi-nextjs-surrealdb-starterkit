@@ -1,4 +1,5 @@
-""" This module demonstrates how to create a FastAPI App,
+"""
+This module demonstrates how to create a FastAPI App,
 connect it to SurrealDB, and implement routes using FastAPI
 """
 from surrealdb import Surreal
@@ -10,49 +11,67 @@ app = FastAPI()
 SURREAL_CONNECTION_URL = "ws://localhost:8000/rpc"
 
 
-async def add_todo_in_surreal_db(todoTitle):
+async def create_db(id, title, description):
     """
-    Function that connects to a local database endpoint
-    and switches to a specific namespace and database
+    Function that connects to a local database endpoint,
+    switches to a specific namespace and database,
+    and creates a table with fields
     """
     async with Surreal(SURREAL_CONNECTION_URL) as db:
         await db.use("starter", "todos")
-
         await db.create(
             "todos",
             {
-                "title": todoTitle
+                "id": id,
+                "title": title,
+                "description": description
             }
         )
 
 
-class TodoCreateRequest(BaseModel):
-    """ Class that inherits from the Pydantic BaseModel
+class Todo(BaseModel):
+    """
+    Class that inherits from the Pydantic BaseModel
     and defines the structure of the JSON payload that will
     be received by the /addTodo endpoint.
 
     Attribute:
-        title (str): Short description of the task to be done
+        id: Unique identifier of the todo item
+        title (str): Title of the task to be done
+        description: Short description of the task to be done
     """
+    id: int
     title: str
+    description: str
 
 
 @app.get("/", tags=["Root"])
-async def read_root():
-    """Route that returns a welcome message when the root URL
+async def home():
+    """
+    Route that returns a welcome message when the root URL
     is accessed
     """
     return {"message": "Welcome to this fantastic app!"}
 
 
 @app.post("/addTodo", tags=["Todos"])
-async def create_todo(todo_create_request: TodoCreateRequest):
+async def create_todo(todo: Todo):
     """
     Route that receives a POST request with a JSON payload
-    containing a "title" field, and stores it in the SurrealDB database
+    containing an id, title, and description,
+    and stores it in the SurrealDB database
     """
-    await add_todo_in_surreal_db(todo_create_request.title)
+    await create_db(todo.id, todo.title, todo.description)
+    return {"To do task added succesfully! "}
 
-    return {"message": "Todo created successfully!"}
 
-
+@app.get("/mytodos", tags=["Todos"])
+async def get_todos():
+    """
+    Route that sends a GET request that fetches all the To Do
+    tasks stored in the SurrealDB database
+    """
+    async with Surreal(SURREAL_CONNECTION_URL) as db:
+        await db.use("starter", "todos")
+        todos = await db.query("select * from todos")
+        return {"todos": todos}
