@@ -32,9 +32,7 @@ async def create_db(title):
         await db.create(
             "todos",
             {
-                
                 "title": title,
-                
             }
         )
 
@@ -47,8 +45,9 @@ class Todo(BaseModel):
     Attribute:
         title (str): Title of the task to be done
     """
-    
+
     title: str
+
 
 class DeleteTodoRequest(BaseModel):
     """
@@ -56,9 +55,10 @@ class DeleteTodoRequest(BaseModel):
     and defines the structure of the JSON payload that will
     be received by the /deleteTodo endpoint.
     Attribute:
-        id: Unique identifier of the todo item to be deleted
+        toDelete: string representing the id to be deleted
     """
     toDelete: str
+
 
 class EditTodoRequest(BaseModel):
     """
@@ -71,6 +71,7 @@ class EditTodoRequest(BaseModel):
     """
     id: str
     newTitle: str
+
 
 @app.get("/", tags=["Root"])
 async def home():
@@ -119,8 +120,9 @@ async def get_todos():
         todos = await db.select("todos")
         return {"todos": todos}
 
+
 @app.post("/deleteTodo", tags=["Todos"])
-async def delete_todo(req : DeleteTodoRequest):
+async def delete_todo(req: DeleteTodoRequest):
     """
     Route that receives a DELETE request with an id parameter
     and deletes the corresponding To Do task from the SurrealDB database
@@ -131,11 +133,13 @@ async def delete_todo(req : DeleteTodoRequest):
         await db.query(f"DELETE {id}")
         return {"message": f"To do task with id {id} deleted successfully!"}
 
+
 @app.post("/editTodo", tags=["Todos"])
 async def edit_todo(req: EditTodoRequest):
     """
-    Route that receives a POST request with an id parameter and newTitle parameter
-    and updates the corresponding To Do task in the SurrealDB database
+    Route that receives a POST request with an id parameter
+    and newTitle parameter and updates the corresponding To Do task
+    in the SurrealDB database
     """
     id = req.id
     new_title = req.newTitle
