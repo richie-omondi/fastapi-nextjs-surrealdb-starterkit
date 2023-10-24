@@ -82,23 +82,6 @@ async def home():
     return {"message": "Welcome to this fantastic app!"}
 
 
-async def create_db(id, task):
-    """
-    Function that connects to a local database endpoint,
-    switches to a specific namespace and database,
-    and creates a table with one field
-    """
-    async with Surreal(SURREAL_CONNECTION_URL) as db:
-        await db.use("starter", "todos")
-        await db.create(
-            "tasks",
-            {
-                "id": id,
-                "task": task
-            }
-        )
-
-
 @app.post("/addTodo", tags=["Todos"])
 async def add_todo(todo: Todo):
     """
