@@ -4,14 +4,24 @@ connect it to SurrealDB, and implement routes using FastAPI
 """
 from surrealdb import Surreal
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 app = FastAPI()
 
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 SURREAL_CONNECTION_URL = "ws://localhost:8000/rpc"
 
 
-async def create_db(id, title, description):
+async def create_db(title):
     """
     Function that connects to a local database endpoint,
     switches to a specific namespace and database,
@@ -22,9 +32,9 @@ async def create_db(id, title, description):
         await db.create(
             "todos",
             {
-                "id": id,
+                
                 "title": title,
-                "description": description
+                
             }
         )
 
@@ -34,16 +44,33 @@ class Todo(BaseModel):
     Class that inherits from the Pydantic BaseModel
     and defines the structure of the JSON payload that will
     be received by the /addTodo endpoint.
-
     Attribute:
-        id: Unique identifier of the todo item
         title (str): Title of the task to be done
-        description: Short description of the task to be done
     """
-    id: int
+    
     title: str
-    description: str
 
+class DeleteTodoRequest(BaseModel):
+    """
+    Class that inherits from the Pydantic BaseModel
+    and defines the structure of the JSON payload that will
+    be received by the /deleteTodo endpoint.
+    Attribute:
+        id: Unique identifier of the todo item to be deleted
+    """
+    toDelete: str
+
+class EditTodoRequest(BaseModel):
+    """
+    Class that inherits from the Pydantic BaseModel
+    and defines the structure of the JSON payload that will
+    be received by the /editTodo endpoint.
+    Attribute:
+        id: Unique identifier of the todo item to be edited
+        newTitle: New title of the todo item
+    """
+    id: str
+    newTitle: str
 
 @app.get("/", tags=["Root"])
 async def home():
@@ -61,7 +88,7 @@ async def create_todo(todo: Todo):
     containing an id, title, and description,
     and stores it in the SurrealDB database
     """
-    await create_db(todo.id, todo.title, todo.description)
+    await create_db(todo.title)
     return {"To do task added succesfully! "}
 
 
@@ -73,5 +100,30 @@ async def get_todos():
     """
     async with Surreal(SURREAL_CONNECTION_URL) as db:
         await db.use("starter", "todos")
-        todos = await db.query("select * from todos")
+        todos = await db.select("todos")
         return {"todos": todos}
+
+@app.post("/deleteTodo", tags=["Todos"])
+async def delete_todo(req : DeleteTodoRequest):
+    """
+    Route that receives a DELETE request with an id parameter
+    and deletes the corresponding To Do task from the SurrealDB database
+    """
+    id = req.toDelete
+    async with Surreal(SURREAL_CONNECTION_URL) as db:
+        await db.use("starter", "todos")
+        await db.query(f"DELETE {id}")
+        return {"message": f"To do task with id {id} deleted successfully!"}
+
+@app.post("/editTodo", tags=["Todos"])
+async def edit_todo(req: EditTodoRequest):
+    """
+    Route that receives a POST request with an id parameter and newTitle parameter
+    and updates the corresponding To Do task in the SurrealDB database
+    """
+    id = req.id
+    new_title = req.newTitle
+    async with Surreal(SURREAL_CONNECTION_URL) as db:
+        await db.use("starter", "todos")
+        await db.query(f"UPDATE todos SET title='{new_title}' where id='{id}'")
+        return {"message": f"To do task with id {id} updated successfully!"}
