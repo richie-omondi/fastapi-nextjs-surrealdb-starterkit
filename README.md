@@ -37,7 +37,7 @@ git clone richie-omondi/fastapi-nextjs-surrealdb-starterkit.git
 
 2. Setup the backend.
 
-Go into to the `/backend` directory and follow the instructions in the `README` to set up the Surreal database client, install all the required dependencies, and start the FastAPI server.
+Go into to the `/backend` directory and follow the instructions in the [README](./backend/README.md) to set up the Surreal database client, install all the required dependencies, and start the FastAPI server.
  
 https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/97223188/bb9402fa-018c-4e03-87d3-f4e300c86b8b
 
@@ -49,7 +49,7 @@ https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/9722
 
 4. Setup the frontend.
 
-Go into the `/client` directory and follow the instructions in the `README` to setup a Next.js project using `npm install` then run the development server using `npm run dev`.
+Go into the `/client` directory and follow the instructions in the [README](./client/README.md) to setup a Next.js project using `npm install` then run the development server using `npm run dev`.
 
 https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/97223188/f9641d40-c7cd-4a2d-bb60-47fe41abda94
 
