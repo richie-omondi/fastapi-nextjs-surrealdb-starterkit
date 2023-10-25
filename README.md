@@ -39,20 +39,22 @@ git clone richie-omondi/fastapi-nextjs-surrealdb-starterkit.git
 
 Go into to the `/backend` directory and follow the instructions in the `README` to set up the Surreal database client, install all the required dependencies, and start the FastAPI server.
  
+https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/97223188/bb9402fa-018c-4e03-87d3-f4e300c86b8b
 
-<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/cbyzitcejkxmu0mkirxn.mp4"></video>
-
-<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/cbyzitcejkxmu0mkirxn.mp4"></video>
 
 3. Setup Surreal in Windows Powershell
 
-<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/a7fjhqpheu2iuuojzidu.mp4"></video>
+https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/97223188/8c238d35-f57d-4f2a-97b2-7e6ac7f8706d
+
 
 4. Setup the frontend.
 
 Go into the `/client` directory and follow the instructions in the `README` to setup a Next.js project using `npm install` then run the development server using `npm run dev`.
 
-<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/j3uhcysezktyxrmth79b.mp4"></video>
+https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/97223188/f9641d40-c7cd-4a2d-bb60-47fe41abda94
+
+
+
 
 ## Contributing
 
