@@ -9,10 +9,9 @@ A simple starter kit for building RESTful APIs with FastAPI and SurrealDB
 
 ## Backend setup
 
-<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/cbyzitcejkxmu0mkirxn.mp4"></video>
+https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/97223188/f99ed092-4678-48d5-b7d8-96b6e2555c1d
 
-
-<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/a7fjhqpheu2iuuojzidu.mp4"></video>
+https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/97223188/77cc7f7a-da74-4b0d-bb3a-8d1bc2c168c4
 
 To set up the backend, follow the outlined steps:
 
