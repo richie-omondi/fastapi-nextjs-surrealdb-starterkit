@@ -32,7 +32,7 @@ This starter kit implements the following endpoints:
 1. Clone the repository
 
 ```console
-git clone richie-omondi/fastapi-nextjs-surrealdb-starterkit.git
+git clone https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit.git
 ```
 
 2. Setup the backend.
@@ -61,6 +61,6 @@ https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/9722
 If you find any issues or have suggestions for improvements, please feel free to open an issue or create a pull request. Our next priority is to set up middleware for authentication and authorization.
 
 ### Steps to Contribute 
-* Clone this repo - `git clone richie-omondi/fastapi-nextjs-surrealdb-starterkit.git`
+* Clone this repo - `git clone https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit.git`
 * Follow the Backend Setup from [here](./backend/README.md)
 * Follow the Frontend Setup from [here](./client/README.md)
