@@ -42,9 +42,6 @@ Go into to the `/backend` directory and follow the instructions in the `README` 
 
 <video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/cbyzitcejkxmu0mkirxn.mp4"></video>
 
-3. Setup Surreal in Windows Powershell
-
-<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/a7fjhqpheu2iuuojzidu.mp4"></video>
 <video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/cbyzitcejkxmu0mkirxn.mp4"></video>
 
 3. Setup Surreal in Windows Powershell
