@@ -1,6 +1,6 @@
 # Starter kit for NextJS + FastAPI + SurrealDB App
 
-This repo provides a starter kit for building applications with [NextJS](https://nextjs.org/) + [FastAPI](https://fastapi.tiangolo.com/) with [SurrealDB](https://surrealdb.com/). It sets up the frontend and backend of building of a simple CRUD Todo App.
+This repo provides a starter kit for building applications with [NextJS](https://nextjs.org/) + [FastAPI](https://fastapi.tiangolo.com/) with [SurrealDB](https://surrealdb.com/). It sets up the frontend and backend of building a simple CRUD Todo App with SurrealDB as the database.
 
 ## Technologies Used
 
@@ -11,11 +11,11 @@ This repo provides a starter kit for building applications with [NextJS](https:/
 
 This starter kit implements the following endpoints:
 
-    * `POST '/addTodo'` - create new Todo task and store it in the SurrealDB database.
-    * `GET '/mytodos'` - fetches all Todo tasks from the SurrealDB database.
-    * `GET '/'` - Returns to home/root URL.
-    * `POST '/editTodo'` - update/edit a Todo task.
-    * `POST '/deleteTodo'` - deletes a Todo task from the SurrealDB database.
+* `POST '/addTodo'` - create new Todo task and store it in the SurrealDB database.
+* `GET '/mytodos'` - fetches all Todo tasks from the SurrealDB database.
+* `GET '/'` - Returns to home/root URL.
+* `POST '/editTodo'` - update/edit a Todo task.
+* `POST '/deleteTodo'` - deletes a Todo task from the SurrealDB database.
 
 ## Requirements
 
@@ -41,4 +41,4 @@ Go into the `/client` directory and follow the instructions in the `README` to s
 
 ## Contributing
 
-If you find any issues or have suggestions for improvements, please feel free to open an issue or create a pull request. Our next priority is set up middleware for authentication and authorization.
+If you find any issues or have suggestions for improvements, please feel free to open an issue or create a pull request. Our next priority is to set up middleware for authentication and authorization.
