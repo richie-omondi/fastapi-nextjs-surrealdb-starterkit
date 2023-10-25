@@ -1,4 +1,6 @@
 ![Frontend Image](https://res.cloudinary.com/dza2rilni/image/upload/v1698238371/vikjfyjnsbex3hlu8ebq.png)
+![Todo Preview](https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/97223188/b2e62505-d564-4188-b2a3-9a07b1bfa815)
+
 
 ## Getting Started
 1. Switch to the `client` directory :
@@ -19,6 +21,10 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 
 ## Learn More
+
+
+https://github.com/richie-omondi/fastapi-nextjs-surrealdb-starterkit/assets/97223188/639eb7e8-bf07-4f22-a257-62089981758b
+
 
 To learn more about Next.js, take a look at the following resources:
 
