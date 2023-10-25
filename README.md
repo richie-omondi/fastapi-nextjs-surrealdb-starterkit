@@ -2,6 +2,10 @@
 
 This repo provides a starter kit for building applications with [NextJS](https://nextjs.org/) + [FastAPI](https://fastapi.tiangolo.com/) with [SurrealDB](https://surrealdb.com/). It sets up the frontend and backend of building a simple CRUD Todo App with SurrealDB as the database.
 
+## Frontend Preview
+
+![Frontend Image](https://res.cloudinary.com/dza2rilni/image/upload/v1698238371/vikjfyjnsbex3hlu8ebq.png)
+
 ## Technologies Used
 
 * [FastAPI](https://fastapi.tiangolo.com/) - Design and build REST APIs for your application in Python.
@@ -28,17 +32,36 @@ This starter kit implements the following endpoints:
 1. Clone the repository
 
 ```console
-git clone git@github.com:richie-omondi/fastapi-nextjs-surrealdb-starterkit.git
+git clone richie-omondi/fastapi-nextjs-surrealdb-starterkit.git
 ```
 
 2. Setup the backend.
 
 Go into to the `/backend` directory and follow the instructions in the `README` to set up the Surreal database client, install all the required dependencies, and start the FastAPI server.
+ 
 
-2. Setup the frontend.
+<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/cbyzitcejkxmu0mkirxn.mp4"></video>
 
-Go into the `/client` directory and follow the instructions in the `README` to setup a Next.js project using `create-next-app` then run the development server using `npm run dev`.
+3. Setup Surreal in Windows Powershell
+
+<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/a7fjhqpheu2iuuojzidu.mp4"></video>
+<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/cbyzitcejkxmu0mkirxn.mp4"></video>
+
+3. Setup Surreal in Windows Powershell
+
+<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/a7fjhqpheu2iuuojzidu.mp4"></video>
+
+4. Setup the frontend.
+
+Go into the `/client` directory and follow the instructions in the `README` to setup a Next.js project using `npm install` then run the development server using `npm run dev`.
+
+<video width="630" height="300" src="https://res.cloudinary.com/dza2rilni/video/upload/v1698237888/j3uhcysezktyxrmth79b.mp4"></video>
 
 ## Contributing
 
 If you find any issues or have suggestions for improvements, please feel free to open an issue or create a pull request. Our next priority is to set up middleware for authentication and authorization.
+
+### Steps to Contribute 
+* Clone this repo - `git clone richie-omondi/fastapi-nextjs-surrealdb-starterkit.git`
+* Follow the Backend Setup from [here](./backend/README.md)
+* Follow the Frontend Setup from [here](./client/README.md)
