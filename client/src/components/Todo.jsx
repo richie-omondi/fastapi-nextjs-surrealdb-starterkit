@@ -1,20 +1,35 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const TodoPage = () => {
     const [inputValue, setInputValue] = useState('');
+
     const [todos, setTodos] = useState([]);
+
     const [editId, setEditId] = useState(null);
+
     const [editValue, setEditValue] = useState('');
+    
+    const [isLoading, setIsLoading] = useState(false)
     
     // Function to fetch todos from the backend and update state
     const fetchTodos = async () => {
+        setIsLoading(true)
+
         try {
             const response = await fetch('http://127.0.0.1:80/mytodos'); 
+
             const data = await response.json();
+
             setTodos(data.todos);
+
+            setIsLoading(false)
+
         } catch (error) {
+
             console.error("Error fetching todos:", error);
+
         }
     };
 
@@ -25,33 +40,57 @@ const TodoPage = () => {
 
 
     const handleInputChange = (event) => {
+
         setInputValue(event.target.value);
+
     };
 
 
 
     const handleEditInputChange = (event) => {
+
         setEditValue(event.target.value);
+
     };
 
     // Function to add a new todo
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        var today = new Date();
+
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
         console.log(inputValue)
-        if (inputValue.trim() !== '') {
+
+        setIsLoading(true)
+
+        if(inputValue === "") {
+            alert("Please Add a Valid Todo!!")
+        }
+
+        else if(inputValue.trim() !== '') {
             // Send a POST request to add a new todo
             try {
                 const response = await fetch('http://127.0.0.1:80/addTodo', { 
                     method: 'POST',
+
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ title: inputValue })
+
+                    body: JSON.stringify({ title: inputValue, created_at : time })
+
                 });
                 setInputValue(''); // Clear the input field
+
                 fetchTodos()
+
             } catch (error) {
                 console.error("Error adding todo:", error);
+
+                alert("Error adding todo :", error)
+
             }
         }
     };
@@ -60,6 +99,9 @@ const TodoPage = () => {
     // Function to delete a todo
     const handleDelete = async (id) => {
         console.log(id)
+
+        setIsLoading(true)
+
         try {
             const response = await fetch('http://127.0.0.1:80/deleteTodo', { 
                     method: 'POST',
@@ -70,8 +112,11 @@ const TodoPage = () => {
                 });
             
             fetchTodos()
+
         } catch (error) {
+
             console.error("Error deleting todo:", error);
+            
         }
     };
 
@@ -79,6 +124,7 @@ const TodoPage = () => {
     // Function to edit a todo
     const handleEdit = async (id, newTitle) => {
         console.log(id, newTitle)
+        setIsLoading(true)
         try {
             const response = await fetch('http://127.0.0.1:80/editTodo', { 
                     method: 'POST',
@@ -130,9 +176,15 @@ const TodoPage = () => {
                 </form>
 
 
-                <ul>
+                {isLoading ? (
+                <div className='flex justify-center items-center '>
+                    <CircularProgress color="inherit" size={70}/>
+                </div>
+                
+    ) :
+                (<ul>
                     {todos.map((todo) => (
-                        <li key={todo.length + 1} className="bg-white rounded-lg shadow-md p-4 mb-2 flex justify-between">
+                        <li key={todo.created_at} className="bg-white rounded-lg shadow-md p-4 mb-2 flex justify-between">
                             {editId === todo.id ? (
                                 <form onSubmit={(event) => handleEditSubmit(event, todo.id)}>
                                     <input
@@ -153,10 +205,15 @@ const TodoPage = () => {
                                         <button onClick={() => handleDelete(todo.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded duration-500 transition-all ease-in-out shadow-sm shadow-black hover:shadow-md ml-2">Delete</button>
                                     </div>
                                 </>
-                            )}
+                            )
+                            
+                            }
                         </li>
                     ))}
-                </ul>
+                </ul>) 
+                }
+
+
             </div>
         </div>
     );
