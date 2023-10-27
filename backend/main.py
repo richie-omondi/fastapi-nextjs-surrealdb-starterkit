@@ -21,7 +21,7 @@ app.add_middleware(
 SURREAL_CONNECTION_URL = "ws://localhost:8000/rpc"
 
 
-async def create_db(title):
+async def create_db(title, created_at):
     """
     Function that connects to a local database endpoint,
     switches to a specific namespace and database,
@@ -33,6 +33,7 @@ async def create_db(title):
             "todos",
             {
                 "title": title,
+                "created_at" : created_at
             }
         )
 
@@ -47,6 +48,8 @@ class Todo(BaseModel):
     """
 
     title: str
+    created_at : str
+    
 
 
 class DeleteTodoRequest(BaseModel):
@@ -88,7 +91,8 @@ async def add_todo(todo: Todo):
     Route that receives a POST request with a JSON payload
     containing the task, and stores it in the SurrealDB database
     """
-    await create_db(todo.title)
+    print(todo.created_at)
+    await create_db(todo.title, todo.created_at)
     return {"To do task added succesfully! "}
 
 
