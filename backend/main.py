@@ -105,7 +105,9 @@ async def get_todos():
     async with Surreal(SURREAL_CONNECTION_URL) as db:
         await db.use("starter", "todos")
         todos = await db.select("todos")
-        return {"todos": todos}
+        sorted_todos = sorted(todos, key=lambda k: k['created_at'])
+        print(sorted_todos)
+        return {"todos": sorted_todos}
 
 
 @app.post("/deleteTodo", tags=["Todos"])
