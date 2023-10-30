@@ -61,12 +61,15 @@ const TodoPage = () => {
 
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
+        var get_total_seconds = (today.getHours() * 60 * 60) + (today.getMinutes() * 60) + (today.getSeconds())
+
         console.log(inputValue)
 
         setIsLoading(true)
 
         if(inputValue === "") {
             alert("Please Add a Valid Todo!!")
+            setIsLoading(false)
         }
 
         else if(inputValue.trim() !== '') {
@@ -79,7 +82,7 @@ const TodoPage = () => {
                         'Content-Type': 'application/json'
                     },
 
-                    body: JSON.stringify({ title: inputValue, created_at : time })
+                    body: JSON.stringify({ title: inputValue, created_at : get_total_seconds })
 
                 });
                 setInputValue(''); // Clear the input field
@@ -98,7 +101,7 @@ const TodoPage = () => {
 
     // Function to delete a todo
     const handleDelete = async (id) => {
-        console.log(id)
+        console.log("Delete Todo with ID : ", id)
 
         setIsLoading(true)
 
@@ -114,7 +117,7 @@ const TodoPage = () => {
             fetchTodos()
 
         } catch (error) {
-
+            alert("Error deleting todo :", error)
             console.error("Error deleting todo:", error);
             
         }
@@ -135,6 +138,7 @@ const TodoPage = () => {
                 });
                 fetchTodos()
             } catch (error) {
+                alert("Error editing todo :", error)
                 console.error("Error editing todo:", error);
             }
         };
@@ -152,6 +156,7 @@ const TodoPage = () => {
                     setEditValue(''); // Clear the input field
                     fetchTodos()
             } catch (error) {
+                alert("Error editing todo :", error)
                 console.error("Error editing todo:", error);
             }
         }
@@ -160,7 +165,7 @@ const TodoPage = () => {
     return (
         <div className="flex flex-col justify-center items-center h-screen ">
                 <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-bl from-indigo-800 via-fuchsia-500 to-rose-500 text-center mb-2">Surreal Todo App</h1>
-            <div className="w-100 bg-gradient-to-r from-purple-600 via-fuchsia-500 to-rose-500  rounded-lg shadow-md border border-gray-300 p-4 no-scrollbar min-h-[500px] shadow-gray-700">
+            <div className="w-100 bg-gradient-to-tr from-purple-600 via-fuchsia-500 to-rose-500  rounded-lg shadow-md border border-gray-300 p-4 overflow-scroll no-scrollbar min-h-[500px] max-h-[700] shadow-gray-700">
                 <form onSubmit={handleSubmit} className="mb-4">
 
                     <input
@@ -168,7 +173,7 @@ const TodoPage = () => {
                         value={inputValue}
                         onChange={handleInputChange}
                         placeholder="Enter a task..."
-                        className="border border-gray-400 rounded py-2 px-4 mr-2 text-black shadow-sm shadow-black"
+                        className="border border-gray-400 rounded py-2 px-4 mr-2 text-black shadow-sm shadow-black outline-none"
                         
                     />
                     
@@ -182,9 +187,9 @@ const TodoPage = () => {
                 </div>
                 
     ) :
-                (<ul>
+                (<ul className=''>
                     {todos.map((todo) => (
-                        <li key={todo.created_at} className="bg-white rounded-lg shadow-md p-4 mb-2 flex justify-between">
+                        <li key={todo.created_at} className="bg-white rounded-lg shadow-md p-4 mb-2 flex justify-between font-bold items-center">
                             {editId === todo.id ? (
                                 <form onSubmit={(event) => handleEditSubmit(event, todo.id)}>
                                     <input
@@ -192,7 +197,7 @@ const TodoPage = () => {
                                         value={editValue}
                                         onChange={handleEditInputChange}
                                         placeholder="Enter a new task..."
-                                        className="border border-gray-400 rounded py-2 px-4 mr-2 text-black shadow-sm shadow-black"
+                                        className="border border-gray-400 rounded py-2 px-4 mr-2 text-black outline-none font-semibold"
                                     />
                                     <button type="submit" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded duration-500 transition-all ease-in-out shadow-sm shadow-black hover:shadow-md">Save</button>
                                     <button onClick={() => setEditId(todo.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded duration-500 transition-all ease-in-out shadow-sm shadow-black hover:shadow-md ml-2">Cancel</button>
